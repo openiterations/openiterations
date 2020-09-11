@@ -1,0 +1,87 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Menlo, monospace;
+  padding: 4em;
+}
+
+body.plain {
+  background: #ccc;
+}
+
+body.gradient0001 {
+  background: linear-gradient(seagreen, teal, darkslateblue);
+}
+
+main {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  color: white;
+  line-height: 1.6em;
+}
+
+a {
+  color: white;
+  font-weight: bold;
+  text-decoration: strike-through;
+}
+
+article {
+  background: black;
+  margin-bottom: 4em;
+  box-shadow: 8px 8px rgba(0, 0, 0, 0.3);
+}
+
+article.white {
+  background: black;
+  color: black;
+}
+
+article.white pre {
+  width: 100%;
+  background: black;
+  color: #999;
+}
+
+.zine-title {
+  margin-left: 0em;
+  background: black;
+  color: white;
+  padding: 2em 1em;
+}
+
+.zine-title h2, .zine-title h3 {
+  margin: 0;
+}
+
+.zine-title h3 {
+  color: #999;
+}
+
+article .zine-left, .zine-right {
+}
+
+article img {
+  width: 100%;
+}
+
+pre {
+  font-size: 12px;
+  margin: 0;
+  padding: 3em;
+  line-height: 1.4em;
+  overflow-x: scroll;
+}
+
+@media only screen and (max-width: 800px) {
+  body {
+    padding: 2em 0;
+  }
+
+  main {
+    max-width: 100%;
+  }
+}
