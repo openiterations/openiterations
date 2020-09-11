@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Home on [open-iterations]</title>
-    <link>https://openiterations.github.io/</link>
+    <link>https://openiterations.github.io/openiterations/</link>
     <description>Recent content in Home on [open-iterations]</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     
-	<atom:link href="https://openiterations.github.io/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://openiterations.github.io/openiterations/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>0001</title>
-      <link>https://openiterations.github.io/issue/0001/</link>
+      <link>https://openiterations.github.io/openiterations/issue/0001/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://openiterations.github.io/issue/0001/</guid>
+      <guid>https://openiterations.github.io/openiterations/issue/0001/</guid>
       <description>~~~~ Welcome to the first edition of [open-iterations]! ~~~~
 This is a new e-zine showcasing generative art and the code that made it. Most of these works were done in Processing and Quil, a Clojure wrapper for Processing. All of the code is included, so feel free to copy and remix anything you see here!
 If you&#39;re interested in contributing to this zine, send an email to:
