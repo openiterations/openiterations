@@ -1,0 +1,206 @@
+---
+title: "0001"
+background: "gradient0001"
+draft: false
+---
+
+<article class="zine-article white">
+  <section class="zine-title">
+    <p>~~~~ Welcome to the first edition of [open-iterations]! ~~~~</p>
+    <p>This is a new e-zine showcasing generative art and the code that made it. Most of these works
+       were done in <a href="#">Processing</a> and <a href="#">Quil</a>, a Clojure wrapper for Processing.
+       All of the code is included, so feel free to copy and remix anything you see here!</p>
+    <p>If you're interested in contributing to this zine, send an email to:</p>
+    <p>&nbsp;&nbsp;&nbsp;&nbsp;openiterations -at- colindrake -dot- me</p>
+    <p>All levels of experience are welcome.</p>
+  </section>
+</article>
+
+<!--article class="zine-article white">
+  <section class="zine-title">
+    <p>Kick back and relax... Maybe play some music before diving in?</p>
+    <audio src="/twenty.aif" controls></audio>
+  </section>
+</article-->
+
+<article class="zine-article white">
+  <section class="zine-title">
+    <h2>"less understood"</h2>
+    <h3>by colin drake. processing.</h3>
+  </section>
+  <section class="zine-left">
+    <img src="/curves.png" />
+  </section>
+  <section class="zine-right">
+    <pre>
+final int NUM_VERTICES = 26;
+
+float[] verticesX = new float[NUM_VERTICES];
+float[] verticesY = new float[NUM_VERTICES];
+
+void setup() {
+  size(2000, 2000);
+  pixelDensity(2);
+  colorMode(HSB, 360, 100, 100);
+  noLoop();
+}
+
+void draw() {
+  background(0);
+  randomizeVertices();
+  drawStipple();
+  drawEdges();
+}
+
+void randomizeVertices() {
+  final float padding = width * 0.1;
+  for (int i = 0; i < NUM_VERTICES; i++) {
+    verticesX[i] = random(padding, width - padding);
+    verticesY[i] = random(padding, height - padding);
+  }
+}
+
+void drawStipple() {
+  for (int i = 0; i < 100000; i++) {
+    stroke(0, 0, 255, 40);
+    point(random(width), random(height));
+  }
+}
+
+void drawEdges() {
+  for (int i = 0; i < NUM_VERTICES; i++) {
+    float x = verticesX[i];
+    float y = verticesY[i];
+    
+    for (int j = 0; j < NUM_VERTICES; j++) {
+      float tx = verticesX[j];
+      float ty = verticesY[j];
+      
+      float at = random(4, 6);
+      float rt = random(8, 12);
+      float rt2 = random(8, 12);
+      float ch = random(1);
+      
+      if (ch < 0.75) {
+        continue;
+      }
+      
+      for (int t = 0; t < 8000; t++) {
+        float pct = random(1);
+        float dx = curvePoint(x, tx, ty, y, pct) + at*sin(pct*rt);
+        float dy = curvePoint(y, ty, x, tx, pct) + at*sin(pct*rt2);
+        stroke(200 + 14*sin(pct*4), 100, 100, 10);
+        point(dx, dy);
+      }
+    }
+  }
+}
+    </pre>
+  </section>
+</article>
+
+<article class="zine-article white">
+  <section class="zine-title">
+    <h2>"untitled"</h2>
+    <h3>by abraham ibarra. processing.</h3>
+  </section>
+  <section class="zine-left">
+    <img src="/abe.jpeg" />
+  </section>
+  <section class="zine-right">
+    <pre>
+    </pre>
+  </section>
+</article>
+
+<article class="zine-article white">
+  <section class="zine-title">
+    <h2>"op1"</h2>
+    <h3>by colin drake. processing.</h3>
+  </section>
+  <section class="zine-left">
+    <img src="/opart4.png" />
+  </section>
+  <section class="zine-right">
+    <pre>
+    </pre>
+  </section>
+</article>
+
+<article class="zine-article white">
+  <section class="zine-title">
+    <h2>"radial"</h2>
+    <h3>by colin drake. quil.</h3>
+  </section>
+  <section class="zine-left">
+    <img src="/tunnel2.png" />
+  </section>
+  <section class="zine-right">
+    <pre>
+(ns radial.core
+  (:require [quil.core :refer :all]))
+
+(defn setup []
+  (color-mode :hsb 360 100 100 100)
+  (no-loop))
+
+(defn settings []
+  (pixel-density 2))
+
+(defn w [n] (* (width) n))
+(defn h [n] (* (height) n))
+
+(defn draw-shell [x y r b]
+  (let [step 0.6
+        total-rotation 360
+        alpha-start 200
+        alpha-range 00
+        range-base 1000
+        range-growth 0
+        range-variance 2]
+    (push-matrix)
+    (translate x y)
+    (rotate (radians r))
+    (doseq [t (range 0 total-rotation step)]
+      (rotate (radians step))
+      (stroke b (+ alpha-start (* alpha-range (/ t total-rotation))))
+      (let [l (+ range-base (* t range-growth) (random 0 range-variance))]
+        (line 0 0 0 l)))
+    (pop-matrix)))
+
+(defn draw []
+  (let [random-spacing 200
+        params [{:offset [(random (- random-spacing) random-spacing)
+                          (random (- random-spacing) random-spacing)]
+                 :rotation (random -180 180)
+                 :color (random 0 100)}
+                {:offset [(random (- random-spacing) random-spacing)
+                          (random (- random-spacing) random-spacing)]
+                 :rotation (random -180 180)
+                 :color (random 0 100)}
+                {:offset [(random (- random-spacing) random-spacing)
+                          (random (- random-spacing) random-spacing)]
+                 :rotation (random -180 180)
+                 :color (random 0 100)}]]
+    (doseq [p params]
+      (draw-shell (+ (w 0.5) (first (:offset p)))
+                  (+ (h 0.5) (second (:offset p)))
+                  (:rotation p)
+                  (:color p)))))
+
+(defsketch radial
+  :title "Radial Sketch"
+  :size [720 720]
+  :setup setup
+  :settings settings
+  :draw draw
+  :features [:keep-on-top])
+    </pre>
+  </section>
+</article>
+
+<article class="zine-article white">
+  <section class="zine-title">
+    <p>Thanks for viewing our first issue!</p>
+  </section>
+</article>
